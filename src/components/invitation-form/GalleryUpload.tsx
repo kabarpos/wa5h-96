@@ -3,9 +3,19 @@ import { Button } from "@/components/ui/button";
 import { ImageUpload } from "./ImageUpload";
 import { Plus, Trash2 } from "lucide-react";
 import { Control, useFieldArray } from "react-hook-form";
+import { z } from "zod";
+
+const formSchema = z.object({
+  gallery: z.array(z.string()),
+  groomName: z.string().optional(),
+  brideName: z.string().optional(),
+  date: z.string().optional(),
+});
+
+type FormData = z.infer<typeof formSchema>;
 
 interface GalleryUploadProps {
-  control: Control<any>; // Using any to match with parent form structure
+  control: Control<FormData>;
 }
 
 export function GalleryUpload({ control }: GalleryUploadProps) {
