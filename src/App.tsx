@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Sidebar } from "@/components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import Index from "@/pages/Index";
 import Analytics from "@/pages/Analytics";
 import Transactions from "@/pages/Transactions";
