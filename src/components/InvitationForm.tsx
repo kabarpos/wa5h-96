@@ -24,6 +24,10 @@ const formSchema = z.object({
   brideMotherName: z.string().min(2, "Nama ibu mempelai wanita minimal 2 karakter"),
   bridePhoto: z.string().optional(),
   
+  // Template and Music
+  templateId: z.string().min(1, "Template undangan wajib dipilih"),
+  musicId: z.string().min(1, "Musik latar wajib dipilih"),
+  
   // Ceremony Details
   date: z.string().min(1, "Tanggal wajib diisi"),
   time: z.string().min(1, "Waktu wajib diisi"),
@@ -67,6 +71,7 @@ const formSchema = z.object({
     bankName: z.string().min(2, "Nama bank/wallet minimal 2 karakter"),
     accountNumber: z.string().min(5, "Nomor rekening/wallet minimal 5 karakter"),
     accountHolder: z.string().min(2, "Nama pemilik minimal 2 karakter"),
+    shippingAddress: z.string().min(10, "Alamat pengiriman minimal 10 karakter"),
   })),
   
   // Additional Information
@@ -88,6 +93,8 @@ export function InvitationForm() {
       brideFatherName: "",
       brideMotherName: "",
       bridePhoto: "",
+      templateId: "",
+      musicId: "",
       date: "",
       time: "",
       timezone: "WIB",

@@ -10,13 +10,14 @@ const formSchema = z.object({
     bankName: z.string().min(2, "Nama bank/wallet minimal 2 karakter"),
     accountNumber: z.string().min(5, "Nomor rekening/wallet minimal 5 karakter"),
     accountHolder: z.string().min(2, "Nama pemilik minimal 2 karakter"),
+    shippingAddress: z.string().min(10, "Alamat pengiriman minimal 10 karakter"),
   })),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 interface GiftRegistryProps {
-  control: Control<FormData>;
+  control: Control<any>;
 }
 
 export function GiftRegistry({ control }: GiftRegistryProps) {
@@ -33,7 +34,12 @@ export function GiftRegistry({ control }: GiftRegistryProps) {
           type="button"
           variant="outline"
           size="sm"
-          onClick={() => append({ bankName: "", accountNumber: "", accountHolder: "" })}
+          onClick={() => append({ 
+            bankName: "", 
+            accountNumber: "", 
+            accountHolder: "",
+            shippingAddress: "" 
+          })}
           className="flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
@@ -89,6 +95,20 @@ export function GiftRegistry({ control }: GiftRegistryProps) {
                 <FormLabel>Nama Pemilik</FormLabel>
                 <FormControl>
                   <Input placeholder="Nama pemilik rekening atau e-wallet" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={control}
+            name={`gifts.${index}.shippingAddress`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Alamat Pengiriman Kado</FormLabel>
+                <FormControl>
+                  <Input placeholder="Masukkan alamat lengkap untuk pengiriman kado" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
