@@ -8,12 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus, Edit2, Trash2, Eye } from "lucide-react";
+import { Plus } from "lucide-react";
 import { InvitationForm } from "@/components/InvitationForm";
 import { useState } from "react";
-import { TemplateShowcase } from "@/components/template-showcase/TemplateShowcase";
 import { RsvpComments } from "@/components/rsvp/RsvpComments";
-import { MusicLibrary } from "@/components/music-library/MusicLibrary";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation } from "react-router-dom";
 
@@ -39,18 +37,6 @@ const dummyInvitations = [
 
 const Invitations = () => {
   const [invitations] = useState(dummyInvitations);
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const currentTab = searchParams.get("tab");
-
-  // If we're on a specific tab from the sidebar, render that content
-  if (currentTab === "templates") {
-    return <TemplateShowcase />;
-  }
-
-  if (currentTab === "music") {
-    return <MusicLibrary />;
-  }
 
   return (
     <div className="space-y-6">
@@ -114,24 +100,6 @@ const Invitations = () => {
                       {invitation.status}
                     </span>
                   </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
-                    Preview
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex items-center gap-2">
-                    <Edit2 className="h-4 w-4" />
-                    Edit
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="flex items-center gap-2 text-destructive"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                    Delete
-                  </Button>
                 </div>
               </Card>
             ))}
