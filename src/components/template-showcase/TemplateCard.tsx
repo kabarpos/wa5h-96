@@ -13,7 +13,7 @@ export function TemplateCard({ id, name, thumbnail, description }: TemplateCardP
   const navigate = useNavigate();
 
   const handleUseTemplate = () => {
-    navigate("/invitations/create", { state: { selectedTemplate: id } });
+    navigate("/invitations", { state: { selectedTemplate: id } });
   };
 
   return (
