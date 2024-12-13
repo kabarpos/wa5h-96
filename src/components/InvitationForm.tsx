@@ -12,6 +12,7 @@ import { SlugGenerator } from "./invitation-form/SlugGenerator";
 import { RsvpSettings } from "./invitation-form/RsvpSettings";
 import { GiftRegistry } from "./invitation-form/GiftRegistry";
 import { AdditionalInfo } from "./invitation-form/AdditionalInfo";
+import { TemplateAndMusic } from "./invitation-form/TemplateAndMusic";
 
 const formSchema = z.object({
   // Couple Details
@@ -131,6 +132,8 @@ export function InvitationForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <CoupleDetails control={form.control} />
+        
+        <TemplateAndMusic control={form.control} />
         
         <CeremonyDetails 
           control={form.control} 
