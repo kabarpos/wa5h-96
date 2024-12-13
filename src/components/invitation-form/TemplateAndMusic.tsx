@@ -25,61 +25,63 @@ export function TemplateAndMusic({ control }: TemplateAndMusicProps) {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold">Template & Music</h3>
       
-      <FormField
-        control={control}
-        name="templateId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-2">
-              <Layout className="h-4 w-4" />
-              Template Undangan
-            </FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Pilih template undangan" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {templates.map((template) => (
-                  <SelectItem key={template.id} value={template.id}>
-                    {template.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <FormField
+          control={control}
+          name="templateId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="flex items-center gap-2">
+                <Layout className="h-4 w-4" />
+                Template Undangan
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih template undangan" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {templates.map((template) => (
+                    <SelectItem key={template.id} value={template.id}>
+                      {template.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-      <FormField
-        control={control}
-        name="musicId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel className="flex items-center gap-2">
-              <Music className="h-4 w-4" />
-              Musik Latar
-            </FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Pilih musik latar" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {musicTracks.map((track) => (
-                  <SelectItem key={track.id} value={track.id}>
-                    {track.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+        <FormField
+          control={control}
+          name="musicId"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="flex items-center gap-2">
+                <Music className="h-4 w-4" />
+                Musik Latar
+              </FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih musik latar" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {musicTracks.map((track) => (
+                    <SelectItem key={track.id} value={track.id}>
+                      {track.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
     </div>
   );
 }
