@@ -1,46 +1,36 @@
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "@/components/Sidebar";
-import Index from "./pages/Index";
-import Analytics from "./pages/Analytics";
-import Transactions from "./pages/Transactions";
-import Notifications from "./pages/Notifications";
-import DataUsers from "./pages/DataUsers";
-import Profile from "./pages/Profile";
-import Settings from "./pages/Settings";
-import Invitations from "./pages/Invitations";
+import { Sidebar } from "@/components/Sidebar";
+import Index from "@/pages/Index";
+import Analytics from "@/pages/Analytics";
+import Transactions from "@/pages/Transactions";
+import Notifications from "@/pages/Notifications";
+import DataUsers from "@/pages/DataUsers";
+import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
+import Invitations from "@/pages/Invitations";
+import Gifts from "@/pages/Gifts";
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+function App() {
+  return (
+    <div className="min-h-screen flex">
+      <Sidebar />
+      <main className="flex-1 p-8 ml-64">
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/notifications" element={<Notifications />} />
+          <Route path="/data-users" element={<DataUsers />} />
+          <Route path="/invitations" element={<Invitations />} />
+          <Route path="/gifts" element={<Gifts />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </main>
       <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <div className="flex min-h-screen bg-background">
-          <Sidebar />
-          <main className="flex-1 md:ml-64 p-8">
-            <div className="max-w-7xl mx-auto">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/analytics" element={<Analytics />} />
-                <Route path="/transactions" element={<Transactions />} />
-                <Route path="/notifications" element={<Notifications />} />
-                <Route path="/data-users" element={<DataUsers />} />
-                <Route path="/invitations" element={<Invitations />} />
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/settings" element={<Settings />} />
-              </Routes>
-            </div>
-          </main>
-        </div>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+    </div>
+  );
+}
 
 export default App;
