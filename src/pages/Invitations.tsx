@@ -15,6 +15,7 @@ import { TemplateShowcase } from "@/components/template-showcase/TemplateShowcas
 import { RsvpComments } from "@/components/rsvp/RsvpComments";
 import { MusicLibrary } from "@/components/music-library/MusicLibrary";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLocation } from "react-router-dom";
 
 // Dummy data for demonstration
 const dummyInvitations = [
@@ -38,15 +39,25 @@ const dummyInvitations = [
 
 const Invitations = () => {
   const [invitations] = useState(dummyInvitations);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const currentTab = searchParams.get("tab");
+
+  // If we're on a specific tab from the sidebar, render that content
+  if (currentTab === "templates") {
+    return <TemplateShowcase />;
+  }
+
+  if (currentTab === "music") {
+    return <MusicLibrary />;
+  }
 
   return (
     <div className="space-y-6">
       <Tabs defaultValue="invitations" className="space-y-6">
         <TabsList>
           <TabsTrigger value="invitations">Undangan</TabsTrigger>
-          <TabsTrigger value="templates">Template</TabsTrigger>
           <TabsTrigger value="rsvp">RSVP</TabsTrigger>
-          <TabsTrigger value="music">Musik</TabsTrigger>
         </TabsList>
 
         <TabsContent value="invitations" className="space-y-6">
@@ -127,16 +138,8 @@ const Invitations = () => {
           </div>
         </TabsContent>
 
-        <TabsContent value="templates">
-          <TemplateShowcase />
-        </TabsContent>
-
         <TabsContent value="rsvp">
           <RsvpComments />
-        </TabsContent>
-
-        <TabsContent value="music">
-          <MusicLibrary />
         </TabsContent>
       </Tabs>
     </div>

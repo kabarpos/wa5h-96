@@ -1,22 +1,11 @@
-import { Home, PieChart, Settings, User, CreditCard, Bell, Menu, Sun, Moon, Users, Heart, Gift } from "lucide-react";
+import { Menu, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-const menuItems = [
-  { icon: Home, label: "Dashboard", path: "/" },
-  { icon: PieChart, label: "Analytics", path: "/analytics" },
-  { icon: CreditCard, label: "Transactions", path: "/transactions" },
-  { icon: Bell, label: "Notifications", path: "/notifications" },
-  { icon: Users, label: "Data Users", path: "/data-users" },
-  { icon: Heart, label: "Wedding Invitations", path: "/invitations" },
-  { icon: Gift, label: "Gift Registry", path: "/gifts" },
-  { icon: User, label: "Profile", path: "/profile" },
-  { icon: Settings, label: "Settings", path: "/settings" },
-];
+import { menuItems } from "@/config/menuItems";
+import { MenuItems } from "./sidebar/MenuItems";
+import { UserProfile } from "./sidebar/UserProfile";
 
 const Sidebar = () => {
-  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
@@ -60,41 +49,8 @@ const Sidebar = () => {
             </button>
           </div>
           
-          <nav className="flex-1 px-4">
-            <ul className="space-y-2">
-              {menuItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                
-                return (
-                  <li key={item.path}>
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200",
-                        "hover:bg-muted",
-                        isActive ? "bg-muted text-primary" : "text-muted-foreground"
-                      )}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span>{item.label}</span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="p-4 mt-auto">
-            <div className="flex items-center gap-3 px-4 py-3">
-              <User className="h-8 w-8 rounded-full bg-accent p-1" />
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">John Doe</span>
-                <span className="text-xs text-muted-foreground">Premium User</span>
-              </div>
-            </div>
-          </div>
+          <MenuItems items={menuItems} onItemClick={() => setIsOpen(false)} />
+          <UserProfile />
         </div>
       </div>
     </>
