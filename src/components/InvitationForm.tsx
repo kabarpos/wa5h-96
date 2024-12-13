@@ -24,7 +24,6 @@ const formSchema = z.object({
   brideMotherName: z.string().min(2, "Nama ibu mempelai wanita minimal 2 karakter"),
   bridePhoto: z.string().optional(),
   
-  // Template and Music
   templateId: z.string().min(1, "Template undangan wajib dipilih"),
   musicId: z.string().min(1, "Musik latar wajib dipilih"),
   
@@ -35,7 +34,6 @@ const formSchema = z.object({
   venueAddress: z.string().min(10, "Alamat lengkap venue minimal 10 karakter"),
   mapsLink: z.string().url("Link Google Maps tidak valid").optional(),
   
-  // Reception Details
   receptionDate: z.string().min(1, "Tanggal resepsi wajib diisi"),
   receptionTime: z.string().min(1, "Waktu resepsi wajib diisi"),
   receptionTimezone: z.enum(["WIB", "WITA", "WIT"]),
@@ -43,19 +41,15 @@ const formSchema = z.object({
   receptionVenueAddress: z.string().min(10, "Alamat lengkap venue resepsi minimal 10 karakter"),
   receptionMapsLink: z.string().url("Link Google Maps tidak valid").optional(),
   
-  // Love Story
   loveStory: z.array(z.object({
     date: z.string().min(1, "Tanggal wajib diisi"),
     story: z.string().min(10, "Cerita minimal 10 karakter"),
   })),
   
-  // Gallery
   gallery: z.array(z.string()),
   
-  // URL Slug
   slug: z.string().min(3, "Slug minimal 3 karakter"),
   
-  // RSVP Settings
   rsvpEnabled: z.boolean(),
   rsvpMessages: z.array(z.object({
     name: z.string().min(2, "Nama minimal 2 karakter"),
@@ -65,7 +59,6 @@ const formSchema = z.object({
     message: z.string().min(10, "Pesan minimal 10 karakter"),
   })),
   
-  // Gift Registry
   gifts: z.array(z.object({
     bankName: z.string().min(2, "Nama bank/wallet minimal 2 karakter"),
     accountNumber: z.string().min(5, "Nomor rekening/wallet minimal 5 karakter"),
@@ -73,7 +66,6 @@ const formSchema = z.object({
     shippingAddress: z.string().min(10, "Alamat pengiriman minimal 10 karakter"),
   })),
   
-  // Additional Information
   quranVerse: z.string().optional(),
   additionalInfo: z.string().optional(),
   thankyouMessage: z.string().optional(),
