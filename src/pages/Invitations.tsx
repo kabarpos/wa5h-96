@@ -8,12 +8,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Plus } from "lucide-react";
+import { Plus, Eye, Edit2, Trash2 } from "lucide-react";
 import { InvitationForm } from "@/components/InvitationForm";
 import { useState } from "react";
 import { RsvpComments } from "@/components/rsvp/RsvpComments";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useLocation } from "react-router-dom";
 
 // Dummy data for demonstration
 const dummyInvitations = [
@@ -100,6 +99,24 @@ const Invitations = () => {
                       {invitation.status}
                     </span>
                   </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                    <Eye className="h-4 w-4" />
+                    Preview
+                  </Button>
+                  <Button variant="outline" size="sm" className="flex items-center gap-2">
+                    <Edit2 className="h-4 w-4" />
+                    Edit
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="flex items-center gap-2 text-destructive"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                    Delete
+                  </Button>
                 </div>
               </Card>
             ))}
