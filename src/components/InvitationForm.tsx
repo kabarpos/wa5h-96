@@ -15,7 +15,6 @@ import { AdditionalInfo } from "./invitation-form/AdditionalInfo";
 import { TemplateAndMusic } from "./invitation-form/TemplateAndMusic";
 
 const formSchema = z.object({
-  // Couple Details
   groomName: z.string().min(2, "Nama mempelai pria minimal 2 karakter"),
   groomFatherName: z.string().min(2, "Nama ayah mempelai pria minimal 2 karakter"),
   groomMotherName: z.string().min(2, "Nama ibu mempelai pria minimal 2 karakter"),
@@ -29,7 +28,6 @@ const formSchema = z.object({
   templateId: z.string().min(1, "Template undangan wajib dipilih"),
   musicId: z.string().min(1, "Musik latar wajib dipilih"),
   
-  // Ceremony Details
   date: z.string().min(1, "Tanggal wajib diisi"),
   time: z.string().min(1, "Waktu wajib diisi"),
   timezone: z.enum(["WIB", "WITA", "WIT"]),
@@ -132,29 +130,14 @@ export function InvitationForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <CoupleDetails control={form.control} />
-        
         <TemplateAndMusic control={form.control} />
-        
-        <CeremonyDetails 
-          control={form.control} 
-          title="Akad Nikah"
-        />
-        
-        <CeremonyDetails 
-          control={form.control} 
-          title="Resepsi"
-        />
-        
+        <CeremonyDetails control={form.control} title="Akad Nikah" />
+        <CeremonyDetails control={form.control} title="Resepsi" />
         <LoveStory control={form.control} />
-        
         <GalleryUpload control={form.control} />
-        
         <SlugGenerator control={form.control} />
-        
         <RsvpSettings control={form.control} />
-        
         <GiftRegistry control={form.control} />
-        
         <AdditionalInfo control={form.control} />
         
         <Button type="submit" className="w-full">

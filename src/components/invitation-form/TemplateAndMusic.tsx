@@ -1,7 +1,7 @@
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Control } from "react-hook-form";
-import { Music, Layout } from "lucide-react";
+import { Layout, Music } from "lucide-react";
 
 // Dummy data for demonstration - will be replaced with actual data later
 const templates = [
