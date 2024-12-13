@@ -1,4 +1,4 @@
-import { Home, PieChart, Settings, User, CreditCard, Bell, Menu, Sun, Moon, Users, Heart } from "lucide-react";
+import { Home, PieChart, Settings, User, CreditCard, Bell, Menu, Sun, Moon, Users, Heart, Gift } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ const menuItems = [
   { icon: Bell, label: "Notifications", path: "/notifications" },
   { icon: Users, label: "Data Users", path: "/data-users" },
   { icon: Heart, label: "Wedding Invitations", path: "/invitations" },
+  { icon: Gift, label: "Gift Registry", path: "/gifts" },
   { icon: User, label: "Profile", path: "/profile" },
   { icon: Settings, label: "Settings", path: "/settings" },
 ];

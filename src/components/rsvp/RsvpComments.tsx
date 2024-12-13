@@ -1,10 +1,20 @@
-import { MessageSquare, Users } from "lucide-react";
+import { MessageSquare, Users, Filter } from "lucide-react";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Dummy data - replace with actual data later
 const rsvpMessages = [
   {
     id: 1,
     name: "Budi Santoso",
+    whatsapp: "+6281234567890",
     attendance: "Hadir",
     numberOfGuests: 2,
     message: "Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.",
@@ -13,6 +23,7 @@ const rsvpMessages = [
   {
     id: 2,
     name: "Siti Aminah",
+    whatsapp: "+6287654321098",
     attendance: "Tidak Hadir",
     numberOfGuests: 0,
     message: "Mohon maaf tidak bisa hadir. Semoga lancar sampai hari H!",
@@ -21,6 +32,17 @@ const rsvpMessages = [
 ];
 
 export function RsvpComments() {
+  const [filter, setFilter] = useState("all");
+
+  const getFilteredMessages = () => {
+    if (filter === "all") return rsvpMessages;
+    return rsvpMessages.filter((msg) => msg.attendance.toLowerCase() === filter);
+  };
+
+  const getAttendanceCount = (status: string) => {
+    return rsvpMessages.filter((msg) => msg.attendance.toLowerCase() === status).length;
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -30,12 +52,48 @@ export function RsvpComments() {
         </p>
       </div>
 
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="p-4 border rounded-lg">
+          <h4 className="font-medium">Hadir</h4>
+          <p className="text-2xl font-bold">{getAttendanceCount("hadir")}</p>
+        </div>
+        <div className="p-4 border rounded-lg">
+          <h4 className="font-medium">Tidak Hadir</h4>
+          <p className="text-2xl font-bold">{getAttendanceCount("tidak hadir")}</p>
+        </div>
+        <div className="p-4 border rounded-lg">
+          <h4 className="font-medium">Belum Pasti</h4>
+          <p className="text-2xl font-bold">{getAttendanceCount("mungkin hadir")}</p>
+        </div>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Select value={filter} onValueChange={setFilter}>
+          <SelectTrigger className="w-full sm:w-[180px]">
+            <Filter className="w-4 h-4 mr-2" />
+            <SelectValue placeholder="Filter kehadiran" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Semua Status</SelectItem>
+            <SelectItem value="hadir">Hadir</SelectItem>
+            <SelectItem value="tidak hadir">Tidak Hadir</SelectItem>
+            <SelectItem value="mungkin hadir">Belum Pasti</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Input
+          placeholder="Cari nama tamu..."
+          className="w-full sm:w-[300px]"
+        />
+      </div>
+
       <div className="space-y-4">
-        {rsvpMessages.map((message) => (
+        {getFilteredMessages().map((message) => (
           <div key={message.id} className="p-4 border rounded-lg space-y-2">
             <div className="flex justify-between items-start">
               <div>
                 <h4 className="font-semibold">{message.name}</h4>
+                <p className="text-sm text-muted-foreground">{message.whatsapp}</p>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Users className="h-4 w-4" />
